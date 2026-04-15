@@ -1,0 +1,76 @@
+############################################
+# Build artifacts (CMake / C++)
+############################################
+/build/
+/build-*/
+/cmake-build-*/
+/out/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+Testing/
+
+############################################
+# Compiled binaries & objects
+############################################
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+app
+tests
+
+!tests/
+!app/
+############################################
+# Debug / profiling output
+############################################
+*.log
+*.stackdump
+vgcore.*
+*.prof
+*.gcda
+*.gcno
+
+############################################
+# Editor / IDE noise
+############################################
+.vscode/
+!.vscode/extensions.json
+
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+############################################
+# Dev Containers / Docker
+############################################
+.devcontainer/.cache/
+.devcontainer/.env
+docker-compose.override.yml
+
+############################################
+# FetchContent / external deps
+############################################
+_FetchContent/
+deps/
+extern/
+
+############################################
+# OS / temp files
+############################################
+*.tmp
+*.bak
+*.old
