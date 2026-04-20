@@ -4,7 +4,7 @@
 int main() {
     //creates/instantiates the game
     Game game("easy");     
-    //instatiate controller            
+    //instantiate controller            
     AppController controller(&game);   
 
     return 0;

@@ -1,28 +1,22 @@
-#include "controller/AppController.h"
-#include "model/MessageModel.h"
-#include "view/MainWindow.h"
+#include "AppController.h"
+#include <iostream>
+using namespace std;
 
-#include <QObject>
-#include <QString>
-#include <QPushButton>
-
-AppController::AppController(MessageModel* model, MainWindow* view)
-    : model(model), view(view) {}
-
-void AppController::initialize() {
-    view->setMessage(QString::fromStdString(model->getMessage()));
-
-    QObject::connect(
-        view->getUpdateButton(),
-        &QPushButton::clicked,
-        [this]() {
-            handleUpdateMessage();
-        }
-    );
+AppController::AppController(Game* game){
+    game = g;
 }
-
-void AppController::handleUpdateMessage() {
-    std::string newMessage = view->getInputText().toStdString();
-    model->setMessage(newMessage);
-    view->setMessage(QString::fromStdString(model->getMessage()));
+void AppController::handleReveal(int row, int col){
+    cout << "Reveal at: (" << row << "," << col << ")" << endl;
+    game->getBoard().revealTile(row, col);
+}
+void AppController::handleFlag(int row, int col) {
+    std::cout << "Flag at (" << row << ", " << col << ")" << std::endl;
+    game->getBoard().flagTile(row, col);
+}
+void AppController::handleFlag(int row, int col) {
+    std::cout << "Flag at (" << row << ", " << col << ")" << std::endl;
+    game->getBoard().flagTile(row, col);
+}
+void AppController::startGame() {
+    game->startGame();
 }
