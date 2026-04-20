@@ -10,4 +10,5 @@ public:
 
     void handleReveal(int row, int col);
     void handleFlag(int row, int col);
+    void startGame();
 };

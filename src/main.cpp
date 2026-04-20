@@ -1,5 +1,7 @@
+#include <iostream>
 #include "model/game.h"
 #include "controller/AppController.h"
+#include "model/MessageModel.h"
 
 int main() {
     //creates/instantiates the game
@@ -12,6 +14,10 @@ int main() {
 
     
     std::cout << msg.getMessage() << std::endl;
+
+    MessageModel model;
+    model.setMessage("hello");
+    std::cout << model.getMessage() << std::endl;
 
     return 0;
 }

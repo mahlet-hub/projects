@@ -11,20 +11,20 @@ private:
     std::string difficulty;
 
 public:
-    //Constructor
+    //Constructor
 
     Game(std::string difficulty);
 
-    //Methods
+    //Methods
 
     void startGame();
     void resetGame();
     bool checkWin();  
     void endGame(bool hitMine);
 
-    //Getters
+    //Getters
     std::string getGameState() const;
-    Board getBoard() const;
+    Board& getBoard();
     std::string getDifficulty() const;
 };
 

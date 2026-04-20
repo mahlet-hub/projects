@@ -17,7 +17,6 @@ set(APP_SOURCES
     src/model/MessageModel.cpp
     src/model/MessageModel.h
     
-
     src/controller/AppController.cpp
     src/controller/AppController.h
 

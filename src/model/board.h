@@ -29,6 +29,12 @@ class Board {
         // Counts bombs around a square
         int countAdjBombs(int row, int col) const;
 
+        // Reveals a single tile
+        void revealTile(int row, int col);
+
+        // Toggles flag on a tile
+        void flagTile(int row, int col);
+
         // Reveals adjacent blank/numbered squares
         void revealAdjBlanks(int row, int col);
 
