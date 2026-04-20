@@ -22,6 +22,12 @@ public:
     // returns the number of bombs surrounding a square 
     int getAdjacentBomb() const;
 
+    // marks square as a bomb
+    void setBomb();
+
+    // reveals the square
+    void reveal();
+
     // places or removes flag on a square
     void toggleFlag();
 
