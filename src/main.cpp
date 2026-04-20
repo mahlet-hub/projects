@@ -4,15 +4,18 @@
 #include "view/MainWindow.h"
 #include "controller/AppController.h"
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
+#include "model/game.h"
+#include "model/MessageModel.h"
+#include "model/square.h"
 
-    MessageModel model;
-    MainWindow view;
-    AppController controller(&model, &view);
+int main() {
+    // MessageModel model;
+    // MainWindow view;
+    // AppController controller(&model, &view);
 
-    controller.initialize();
-    view.show();
+    AppController controller;
+    AppController(&model, &view);
+    controller.startGame();
 
-    return app.exec();
+    return 0;
 }
