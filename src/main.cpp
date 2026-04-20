@@ -1,18 +1,11 @@
-#include <QApplication>
-
-#include "model/MessageModel.h"
-#include "view/MainWindow.h"
+#include "model/game.h"
 #include "controller/AppController.h"
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
+int main() {
+    //creates/instantiates the game
+    Game game("easy");     
+    //instatiate controller            
+    AppController controller(&game);   
 
-    MessageModel model;
-    MainWindow view;
-    AppController controller(&model, &view);
-
-    controller.initialize();
-    view.show();
-
-    return app.exec();
+    return 0;
 }

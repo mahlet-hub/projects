@@ -1,16 +1,13 @@
 #pragma once
-
-class MessageModel;
-class MainWindow;
+#include "model/game.h"
 
 class AppController {
-public:
-    AppController(MessageModel* model, MainWindow* view);
-
-    void initialize();
-    void handleUpdateMessage();
-
 private:
-    MessageModel* model;
-    MainWindow* view;
+    Game* game;  
+
+public:
+    AppController(Game* g);
+
+    void handleReveal(int row, int col);
+    void handleFlag(int row, int col);
 };
