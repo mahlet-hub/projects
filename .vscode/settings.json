@@ -22,5 +22,6 @@
   "editor.suggest.preview": false,
   "editor.suggestOnTriggerCharacters": true,
   "github.copilot.enabled": false,
-  "github.copilot.inlineSuggest.enable": false
+  "github.copilot.inlineSuggest.enable": false,
+  "C_Cpp.errorSquiggles": "disabled"
 }
