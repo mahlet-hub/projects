@@ -10,12 +10,13 @@ class Board {
         int rows;
         int cols;
         int numBombs;
+        int numFlags;
     public:
         // Constructor
         Board(int rows, int cols, int numBombs);
 
         // Places bombs on the board
-        void placeBombs();
+        void placeBombs(int initRow, int initCol);
 
         // Computes adjacent bomb counts for non-bomb squares
         void calculateAdjBomb();
