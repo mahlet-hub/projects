@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Square.h"
+#include "square.h"
 using namespace std;
 
 class Board {
