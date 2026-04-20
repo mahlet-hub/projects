@@ -10,9 +10,13 @@ qt_standard_project_setup()
 
 set(APP_SOURCES
     src/main.cpp
+    src/model/board.h
+    src/model/game.h
+    src/model/square.h
 
     src/model/MessageModel.cpp
     src/model/MessageModel.h
+    
 
     src/controller/AppController.cpp
     src/controller/AppController.h
