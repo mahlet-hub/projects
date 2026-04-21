@@ -14,6 +14,9 @@ set(APP_SOURCES
     src/model/game.h
     src/model/square.h
 
+    src/model/board.cpp
+    src/model/game.cpp
+    src/model/square.cpp
     src/model/MessageModel.cpp
     src/model/MessageModel.h
     

@@ -12,7 +12,8 @@ class Board {
         int numBombs;
         int numFlags;
     public:
-        // Constructor
+        // Constructors
+        Board();
         Board(int rows, int cols, int numBombs);
 
         // Places bombs on the board
