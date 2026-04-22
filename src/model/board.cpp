@@ -1,7 +1,10 @@
 #include "board.h"
+using namespace std;
 
-Board::Board() {}
-Board::Board(int rows, int cols, int numBombs) {}
+#include <string>
+
+
+Board::Board(string difficulty) {}
 void Board::placeBombs(int initRow, int initCol) {}
 void Board::calculateAdjBomb() {}
 int Board::getRows() const { return 0; }

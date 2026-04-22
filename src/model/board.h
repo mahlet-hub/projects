@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include "square.h"
 using namespace std;
 
@@ -13,8 +14,8 @@ class Board {
         int numFlags;
     public:
         // Constructors
-        Board();
-        Board(int rows, int cols, int numBombs);
+        
+        Board(string difficulty);
 
         // Places bombs on the board
         void placeBombs(int initRow, int initCol);
