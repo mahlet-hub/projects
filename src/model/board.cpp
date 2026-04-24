@@ -3,7 +3,7 @@ using namespace std;
 
 #include <string>
 
-
+Board::Board() {}
 Board::Board(string difficulty) {}
 void Board::placeBombs(int initRow, int initCol) {}
 void Board::calculateAdjBomb() {}

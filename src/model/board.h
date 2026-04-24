@@ -14,7 +14,7 @@ class Board {
         int numFlags;
     public:
         // Constructors
-        
+        Board();
         Board(string difficulty);
 
         // Places bombs on the board
