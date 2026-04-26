@@ -6,41 +6,35 @@
 using namespace std;
 
 class Board {
-    private:
+private:
     vector<vector<Square>> grid;
-        int rows;
-        int cols;
-        int numBombs;
-        int numFlags;
-    public:
-        // Constructors
-        Board();
-        Board(string difficulty);
+    int rows;
+    int cols;
+    int numBombs;
 
-        // Places bombs on the board
-        void placeBombs(int initRow, int initCol);
+    void initGrid();
 
-        // Computes adjacent bomb counts for non-bomb squares
-        void calculateAdjBomb();
+public:
+    Board();
+    Board(string difficulty);
 
-        // Getters
-        int getRows() const;
-        int getCols() const;
-        int getNumBombs() const;
+    // Called after first click — excludes 3x3 neighborhood of (initRow, initCol)
+    void placeBombs(int initRow, int initCol);
 
-        // Counts bombs around a square
-        int countAdjBombs(int row, int col) const;
+    // Sets adjacentBombs on every non-bomb square
+    void calculateAdjBomb();
 
-        // Reveals a single tile
-        void revealTile(int row, int col);
+    // Access a square in the grid
+    Square& getSquare(int row, int col);
+    const Square& getSquare(int row, int col) const;
 
-        // Toggles flag on a tile
-        void flagTile(int row, int col);
+    // Getters
+    int getRows() const;
+    int getCols() const;
+    int getNumBombs() const;
 
-        // Reveals adjacent blank/numbered squares
-        void revealAdjBlanks(int row, int col);
+    // Counts bombs in the 8 neighbors of (row, col)
+    int countAdjBombs(int row, int col) const;
 
-        // Checks if a position is inside the board
-        bool inBounds(int row, int col) const;
-
+    bool inBounds(int row, int col) const;
 };
