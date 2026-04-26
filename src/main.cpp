@@ -1,23 +1,15 @@
-#include <iostream>
+#include <QApplication>
 #include "model/game.h"
-#include "controller/AppController.h"
-#include "model/MessageModel.h"
+#include "view/MainWindow.h"
 
-int main() {
-    //creates/instantiates the game
-    Game game("easy");     
-    //instantiate controller            
-    AppController controller(&game);   
-    MessageModel msg;
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
-    msg.setMessage("Game started successfully!");
+    Game game("easy");
+    game.startGame(); 
 
-    
-    std::cout << msg.getMessage() << std::endl;
+    MainWindow window(&game);
+    window.show();
 
-    MessageModel model;
-    model.setMessage("hello");
-    std::cout << model.getMessage() << std::endl;
-
-    return 0;
+    return app.exec();
 }

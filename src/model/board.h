@@ -42,4 +42,7 @@ class Board {
         // Checks if a position is inside the board
         bool inBounds(int row, int col) const;
 
+        Square& getSquare(int row, int col);
+        const Square& getSquare(int row, int col) const;
+
 };

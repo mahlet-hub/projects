@@ -5,7 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+# 🔥 ADD Multimedia here
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+
 qt_standard_project_setup()
 
 set(APP_SOURCES
@@ -31,4 +33,5 @@ add_executable(app ${APP_SOURCES})
 
 target_include_directories(app PRIVATE src)
 
-target_link_libraries(app PRIVATE Qt6::Widgets)
+# 🔥 LINK Multimedia here
+target_link_libraries(app PRIVATE Qt6::Widgets Qt6::Multimedia)
