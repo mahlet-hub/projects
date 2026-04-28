@@ -442,6 +442,9 @@ void MainWindow::updateUI() {
                             border: 2px solid #2a2a2a;
                             border-radius: 0px;
                             font-size: 20px;
+                            text-align: top;
+                            text-align: left;
+                            
                         }
                         QPushButton:disabled {
                             background-color: %1;
@@ -462,6 +465,8 @@ void MainWindow::updateUI() {
                                 font-size: 20px;
                                 font-weight: bold;
                                 color: #1a1a1a;
+                                text-align: top;
+                                text-align: left;
                             }
                             QPushButton:disabled {
                                 background-color: #f48fb1;
@@ -478,6 +483,8 @@ void MainWindow::updateUI() {
                                 border: 2px solid #b39ddb;
                                 border-radius: 0px;
                                 font-size: 20px;
+                                text-align: top;
+                                text-align: left;
                             }
                             QPushButton:disabled {
                                 background-color: #e1d5f5;
@@ -536,6 +543,8 @@ void MainWindow::updateUI() {
                         border: 2px solid #2a2a2a;
                         border-radius: 0px;
                         font-size: 20px;
+                        text-align: top;
+                        text-align: left;
                     }
                     QPushButton:disabled {
                         background-color: %1;
