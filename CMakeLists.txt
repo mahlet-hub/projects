@@ -25,6 +25,7 @@ set(APP_SOURCES
     src/controller/AppController.cpp
     src/controller/AppController.h
 
+
     src/view/MainWindow.cpp
     src/view/MainWindow.h
 )

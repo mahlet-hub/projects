@@ -65,7 +65,7 @@ void MainWindow::setupStartPage() {
     layout->setContentsMargins(30, 60, 30, 30);
     layout->setSpacing(40);
 
-    QLabel* title = new QLabel("MINESWEEPER");
+    QLabel* title = new QLabel("M 🚩NESWEEPER");
     title->setAlignment(Qt::AlignCenter);
     title->setStyleSheet(R"(
         font-size: 48px;
@@ -339,6 +339,14 @@ void MainWindow::connectButton(QPushButton* button, int row, int col) {
         if (wasFirst) firstClickSound->play();
         updateUI();
     });
+
+    button->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    connect(button, &QPushButton::customContextMenuRequested, [=](const QPoint &pos) {
+        Q_UNUSED(pos);
+        controller->handleFlag(row, col);
+        updateUI();
+    });
 }
 
 
@@ -496,10 +504,36 @@ void MainWindow::updateUI() {
             }
             else if (square.getIsFlagged()) {
                 button->setText("🚩");
+                button->setStyleSheet(QString(R"(
+                    QPushButton {
+                    background-color: #C3B1E1;
+                    border-top: 3px solid #e0d4f7;
+                    border-left: 3px solid #e0d4f7;
+                    border-right: 3px solid #2a2a2a;
+                    border-bottom: 3px solid #2a2a2a;
+                    text-align: top;
+                    text-align: left;
+                            
+                        }
+
+                    )"));
             }
             else {
                 button->setText("");
                 button->setEnabled(true);
+                button->setStyleSheet(QString(R"(
+                QPushButton {
+                background-color: #C3B1E1;
+                border-top: 3px solid #e0d4f7;
+                border-left: 3px solid #e0d4f7;
+                border-right: 3px solid #2a2a2a;
+                border-bottom: 3px solid #2a2a2a;
+                text-align: top;
+                text-align: left;
+                            
+                        }
+
+                    )"));
             }
         }
     }
