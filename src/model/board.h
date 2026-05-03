@@ -26,6 +26,8 @@ class Board {
         int getRows() const;
         int getCols() const;
         int getNumBombs() const;
+        int getNumFlags() const;
+        void setNumFlags(int numFlags);
 
         // Counts bombs around a square
         int countAdjBombs(int row, int col) const;

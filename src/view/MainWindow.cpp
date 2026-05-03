@@ -6,6 +6,9 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QTimer>
+#include <QFileDialog>
+#include <QDir>
+#include <QCoreApplication>
 
 MainWindow::MainWindow(Game* game, QWidget* parent)
     : QMainWindow(parent), game(game)
@@ -270,7 +273,112 @@ void MainWindow::setupGameUI() {
         stackedWidget->setCurrentWidget(difficultyPage);
     });
 
+    QPushButton* saveBtn = new QPushButton("Save");
+    saveBtn->setFixedSize(150, 50);
+    saveBtn->setStyleSheet(R"(
+        QPushButton {
+            background-color: #C3B1E1;
+            border-top: 4px solid #e0d4f7;
+            border-left: 4px solid #e0d4f7;
+            border-right: 4px solid #2a2a2a;
+            border-bottom: 4px solid #2a2a2a;
+            border-radius: 0px;
+            color: black;
+            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 6px;
+        }
+        QPushButton:hover {
+            background-color: #d0bff0;
+        }
+        QPushButton:pressed {
+            background-color: #a88cd6;
+            border-top: 4px solid #2a2a2a;
+            border-left: 4px solid #2a2a2a;
+            border-right: 4px solid #e0d4f7;
+            border-bottom: 4px solid #e0d4f7;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+    )");
+
+    connect(saveBtn, &QPushButton::clicked, [=]() {
+        QString saveFolder = QCoreApplication::applicationDirPath() + "/../SavedGames";
+        QDir().mkpath(saveFolder);
+        QString saveFile = QFileDialog::getSaveFileName(this, "Save Game", saveFolder + "/minesweeper_save.sav", "Minesweeper Saves (*.sav);;All Files (*)");
+        if (saveFile.isEmpty()) return;
+
+        try {
+            game->saveToFile(saveFile.toStdString());
+            QMessageBox::information(this, "Save Successful", "Your game was saved to:\n" + saveFile);
+        } catch (const std::exception& e) {
+            QMessageBox::warning(this, "Save Failed", e.what());
+        }
+    });
+
+    QPushButton* loadBtn = new QPushButton("Load");
+    loadBtn->setFixedSize(150, 50);
+    loadBtn->setStyleSheet(R"(
+        QPushButton {
+            background-color: #C3B1E1;
+            border-top: 4px solid #e0d4f7;
+            border-left: 4px solid #e0d4f7;
+            border-right: 4px solid #2a2a2a;
+            border-bottom: 4px solid #2a2a2a;
+            border-radius: 0px;
+            color: black;
+            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 6px;
+        }
+        QPushButton:hover {
+            background-color: #d0bff0;
+        }
+        QPushButton:pressed {
+            background-color: #a88cd6;
+            border-top: 4px solid #2a2a2a;
+            border-left: 4px solid #2a2a2a;
+            border-right: 4px solid #e0d4f7;
+            border-bottom: 4px solid #e0d4f7;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+    )");
+
+    connect(loadBtn, &QPushButton::clicked, [=]() {
+        QString saveFolder = QCoreApplication::applicationDirPath() + "/../SavedGames";
+        QString loadFile = QFileDialog::getOpenFileName(this, "Load Game", saveFolder, "Minesweeper Saves (*.sav);;All Files (*)");
+        if (loadFile.isEmpty()) return;
+
+        try {
+            Game* newGame = new Game("easy"); // dummy difficulty, will be overwritten
+            newGame->loadFromFile(loadFile.toStdString());
+
+            // Clean up old game and controller
+            delete controller;
+            delete game;
+
+            game = newGame;
+            controller = new AppController(game);
+
+            // Recreate the grid for the new board size
+            setupGrid();
+            updateUI();
+
+            //we can incllude this if we want... it is smoother gameplay w/o it tho
+            //QMessageBox::information(this, "Load Successful", "Game loaded from:\n" + loadFile);
+        } catch (const std::exception& e) {
+            QMessageBox::warning(this, "Load Failed", e.what());
+        }
+    });
+
     outerLayout->addWidget(backBtn, 0, Qt::AlignCenter);
+    outerLayout->addWidget(saveBtn, 0, Qt::AlignCenter);
+    outerLayout->addWidget(loadBtn, 0, Qt::AlignCenter);
 
     gamePage->setStyleSheet("background-color: #E6D6FF;");
     gamePage->setLayout(outerLayout);

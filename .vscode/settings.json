@@ -15,16 +15,16 @@
     //WINDOWS: comment out the MAC line and uncomment the WINDOWS line, changing the path to match your Qt installation
     //"Qt6_ROOT": "C:/Qt/6.11.0/msvc2022_arm64"
 
-   "Qt6_ROOT":"C:/Qt/6.11.0/msvc2022_64"
+   "Qt6_ROOT":"C:/Qt/6.11.0/msvc2022_arm64"
     
   },
 
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
 
-  "editor.inlineSuggest.enabled": false,
-  "editor.suggest.preview": false,
-  "editor.suggestOnTriggerCharacters": true,
-  "github.copilot.enabled": false,
-  "github.copilot.inlineSuggest.enable": false,
-  "C_Cpp.errorSquiggles": "disabled"
+  // "editor.inlineSuggest.enabled": false,
+  // "editor.suggest.preview": false,
+  // "editor.suggestOnTriggerCharacters": true,
+  // "github.copilot.enabled": false,
+  // "github.copilot.inlineSuggest.enable": false,
+  // "C_Cpp.errorSquiggles": "disabled"
 }

@@ -43,6 +43,8 @@ void Board::calculateAdjBomb() {
 int Board::getRows() const { return rows; }
 int Board::getCols() const { return cols; }
 int Board::getNumBombs() const { return numBombs; }
+int Board::getNumFlags() const { return numFlags; }
+void Board::setNumFlags(int numFlags) { this->numFlags = numFlags; }
  
 int Board::countAdjBombs(int row, int col) const {
     int count = 0;
