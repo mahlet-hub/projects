@@ -395,10 +395,23 @@ void MainWindow::setupGrid() {
     int rows = game->getBoard().getRows();
     int cols = game->getBoard().getCols();
 
+    string diff = game->getDifficulty();
+
     buttons.clear();
     buttons.resize(rows, std::vector<QPushButton*>(cols));
 
-    int size = 60;
+    int size = 0;
+    if(diff == "easy") {
+        size = 60;
+    } else if (diff == "medium") {
+        size = 27;
+    } else {
+        size = 20;
+    }
+    //if(difficulty == easy) { int size = 60}
+    //else if (difficulty == medium) { int size == 30} 
+    //else {int size = 20}
+    //int size = 20;
 
     for (int r = 0; r < rows; r++) {
         for (int c = 0; c < cols; c++) {
