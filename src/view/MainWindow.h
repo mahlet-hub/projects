@@ -16,7 +16,7 @@ private:
     Game* game;
     AppController* controller;
 
-   
+
     QStackedWidget* stackedWidget;
     QWidget* startPage;
     QWidget* difficultyPage;

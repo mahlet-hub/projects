@@ -36,3 +36,14 @@ target_include_directories(app PRIVATE src)
 
 # 🔥 LINK Multimedia here
 target_link_libraries(app PRIVATE Qt6::Widgets Qt6::Multimedia)
+
+qt_add_resources(app "resources"
+    PREFIX "/"
+    FILES
+        src/view//bomb-3.gif
+        src/view/marioground.png
+        src/view/start.wav
+        src/view/firstclick.wav
+        src/view/bombsound.wav
+        src/view/defeat.wav
+)

@@ -1,5 +1,8 @@
 #include "MainWindow.h"
-
+#include <QMovie>
+#include <QPainter>
+#include <QPixmap>
+#include <QSoundEffect>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -13,26 +16,21 @@ MainWindow::MainWindow(Game* game, QWidget* parent)
     controller = new AppController(game);
 
     bgSound = new QSoundEffect(this);
-    bgSound->setSource(QUrl::fromLocalFile("src/view/start.wav"));
+    bgSound->setSource(QUrl("qrc:/src/view/start.wav"));
     bgSound->setLoopCount(1);
     bgSound->setVolume(1.0);
-
-    QTimer::singleShot(200, [=]() {
-        bgSound->play();
-    });
+    QTimer::singleShot(200, [=]() { bgSound->play(); });
 
     firstClickSound = new QSoundEffect(this);
-    firstClickSound->setSource(QUrl::fromLocalFile("src/view/firstclick.wav"));
+    firstClickSound->setSource(QUrl("qrc:/src/view/firstclick.wav"));
     firstClickSound->setVolume(0.8);
 
-
     bombRevealSound = new QSoundEffect(this);
-    bombRevealSound->setSource(QUrl::fromLocalFile("src/view/bombsound.wav"));
+    bombRevealSound->setSource(QUrl("qrc:/src/view/bombsound.wav"));
     bombRevealSound->setVolume(0.8);
 
-
     defeatSound = new QSoundEffect(this);
-    defeatSound->setSource(QUrl::fromLocalFile("src/view/defeat.wav"));
+    defeatSound->setSource(QUrl("qrc:/src/view/defeat.wav"));
     defeatSound->setVolume(1.0);
 
     stackedWidget = new QStackedWidget(this);
@@ -49,7 +47,6 @@ MainWindow::MainWindow(Game* game, QWidget* parent)
     stackedWidget->addWidget(gameOverPage);
 
     stackedWidget->setCurrentWidget(startPage);
-
     setFixedSize(700, 800);
 }
 
@@ -57,14 +54,15 @@ MainWindow::~MainWindow() {
     delete controller;
 }
 
-
 void MainWindow::setupStartPage() {
     startPage = new QWidget();
+    startPage->setStyleSheet("background-color: #E6D6FF;");
 
     QVBoxLayout* layout = new QVBoxLayout();
-    layout->setContentsMargins(30, 60, 30, 30);
-    layout->setSpacing(40);
+    layout->setContentsMargins(0, 40, 0, 0);
+    layout->setSpacing(20);
 
+    // Title
     QLabel* title = new QLabel("M 🚩NESWEEPER");
     title->setAlignment(Qt::AlignCenter);
     title->setStyleSheet(R"(
@@ -76,9 +74,9 @@ void MainWindow::setupStartPage() {
         text-transform: uppercase;
     )");
 
+    // Start button
     QPushButton* startBtn = new QPushButton("START");
     startBtn->setFixedSize(220, 70);
-
     startBtn->setStyleSheet(R"(
         QPushButton {
             background-color: #98fb98;
@@ -94,9 +92,7 @@ void MainWindow::setupStartPage() {
             letter-spacing: 3px;
             padding: 10px;
         }
-        QPushButton:hover {
-            background-color: #aafdaa;
-        }
+        QPushButton:hover { background-color: #aafdaa; }
         QPushButton:pressed {
             background-color: #7ed67e;
             border-top: 4px solid #2a2a2a;
@@ -108,12 +104,46 @@ void MainWindow::setupStartPage() {
         }
     )");
 
-    layout->addWidget(title, 0, Qt::AlignTop | Qt::AlignCenter);
-    layout->addStretch();
+    // GIF
+    QWidget* animContainer = new QWidget();
+    animContainer->setStyleSheet("background: transparent;");
+
+    QLabel* imageLabel = new QLabel(animContainer);  // ← parent is container
+    QMovie* movie = new QMovie(":/src/view/bomb-3.gif");
+    movie->setScaledSize(QSize(100, 100));
+    connect(movie, &QMovie::finished, movie, &QMovie::start);
+    imageLabel->setMovie(movie);
+    imageLabel->setFixedSize(100, 100);
+    imageLabel->move(700, 0);  // start off screen right
+    movie->start();
+
+    QTimer* walkTimer = new QTimer(this);
+    int* xPos = new int(350);
+    connect(walkTimer, &QTimer::timeout, [=]() {
+        *xPos -= 3;
+        if (*xPos < -300) {
+        walkTimer->stop();
+        return;
+    }
+    imageLabel->move(*xPos, 313);
+ });
+    walkTimer->start(16);
+    // Ground
+    QLabel* groundLabel = new QLabel();
+    QPixmap ground(":/src/view/marioground.png");
+    groundLabel->setPixmap(ground.scaled(700, ground.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    groundLabel->setFixedSize(700, ground.height());
+
+
+    // Layout order: title, button, stretch, gif, ground
+    layout->addWidget(title, 0, Qt::AlignCenter);
     layout->addWidget(startBtn, 0, Qt::AlignCenter);
     layout->addStretch();
+    layout->addWidget(groundLabel);
+    layout->addWidget(imageLabel, 0, Qt::AlignCenter);
 
-    startPage->setStyleSheet("background-color: #E6D6FF;");
+ 
+
     startPage->setLayout(layout);
 
     connect(startBtn, &QPushButton::clicked, [=]() {
