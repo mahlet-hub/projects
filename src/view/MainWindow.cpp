@@ -56,13 +56,12 @@ MainWindow::~MainWindow() {
 
 void MainWindow::setupStartPage() {
     startPage = new QWidget();
-    startPage->setStyleSheet("background-color: #E6D6FF;");
+    startPage->setStyleSheet("background-color: #87CEEB;");
 
     QVBoxLayout* layout = new QVBoxLayout();
     layout->setContentsMargins(0, 40, 0, 0);
     layout->setSpacing(20);
 
-    // Title
     QLabel* title = new QLabel("M 🚩NESWEEPER");
     title->setAlignment(Qt::AlignCenter);
     title->setStyleSheet(R"(
@@ -74,7 +73,7 @@ void MainWindow::setupStartPage() {
         text-transform: uppercase;
     )");
 
-    // Start button
+
     QPushButton* startBtn = new QPushButton("START");
     startBtn->setFixedSize(220, 70);
     startBtn->setStyleSheet(R"(
@@ -104,17 +103,17 @@ void MainWindow::setupStartPage() {
         }
     )");
 
-    // GIF
+    
     QWidget* animContainer = new QWidget();
     animContainer->setStyleSheet("background: transparent;");
 
-    QLabel* imageLabel = new QLabel(animContainer);  // ← parent is container
+    QLabel* imageLabel = new QLabel(animContainer);  
     QMovie* movie = new QMovie(":/src/view/bomb-3.gif");
     movie->setScaledSize(QSize(100, 100));
     connect(movie, &QMovie::finished, movie, &QMovie::start);
     imageLabel->setMovie(movie);
     imageLabel->setFixedSize(100, 100);
-    imageLabel->move(700, 0);  // start off screen right
+    imageLabel->move(700, 0);  
     movie->start();
 
     QTimer* walkTimer = new QTimer(this);
@@ -128,21 +127,21 @@ void MainWindow::setupStartPage() {
     imageLabel->move(*xPos, 313);
  });
     walkTimer->start(16);
-    // Ground
+ 
     QLabel* groundLabel = new QLabel();
     QPixmap ground(":/src/view/marioground.png");
     groundLabel->setPixmap(ground.scaled(700, ground.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     groundLabel->setFixedSize(700, ground.height());
 
 
-    // Layout order: title, button, stretch, gif, ground
     layout->addWidget(title, 0, Qt::AlignCenter);
     layout->addWidget(startBtn, 0, Qt::AlignCenter);
     layout->addStretch();
     layout->addWidget(groundLabel);
     layout->addWidget(imageLabel, 0, Qt::AlignCenter);
+    
 
- 
+
 
     startPage->setLayout(layout);
 

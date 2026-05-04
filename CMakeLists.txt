@@ -41,6 +41,7 @@ qt_add_resources(app "resources"
     PREFIX "/"
     FILES
         src/view//bomb-3.gif
+        src/view/cloud.png
         src/view/marioground.png
         src/view/start.wav
         src/view/firstclick.wav
