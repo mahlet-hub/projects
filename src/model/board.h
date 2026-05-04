@@ -1,40 +1,51 @@
 #pragma once
 
 #include <vector>
-#include <string>
 #include "square.h"
 using namespace std;
 
 class Board {
-private:
+    private:
     vector<vector<Square>> grid;
-    int rows;
-    int cols;
-    int numBombs;
+        int rows;
+        int cols;
+        int numBombs;
+        int numFlags;
+        int flagsLeft;
+    public:
+        // Constructors
+        Board();
+        Board(int rows, int cols, int numBombs, int flagsLeft);
 
-    void initGrid();
+        // Places bombs on the board
+        void placeBombs(int initRow, int initCol);
 
-public:
-    Board();
-    Board(string difficulty);
+        // Computes adjacent bomb counts for non-bomb squares
+        void calculateAdjBomb();
 
-    // Called after first click — excludes 3x3 neighborhood of (initRow, initCol)
-    void placeBombs(int initRow, int initCol);
+        // Getters
+        int getRows() const;
+        int getCols() const;
+        int getNumBombs() const;
+        int getFlagsLeft() const;
 
-    // Sets adjacentBombs on every non-bomb square
-    void calculateAdjBomb();
 
-    // Access a square in the grid
-    Square& getSquare(int row, int col);
-    const Square& getSquare(int row, int col) const;
+        // Counts bombs around a square
+        int countAdjBombs(int row, int col) const;
 
-    // Getters
-    int getRows() const;
-    int getCols() const;
-    int getNumBombs() const;
+        // Reveals a single tile
+        void revealTile(int row, int col);
 
-    // Counts bombs in the 8 neighbors of (row, col)
-    int countAdjBombs(int row, int col) const;
+        // Toggles flag on a tile
+        void flagTile(int row, int col);
 
-    bool inBounds(int row, int col) const;
+        // Reveals adjacent blank/numbered squares
+        void revealAdjBlanks(int row, int col);
+
+        // Checks if a position is inside the board
+        bool inBounds(int row, int col) const;
+
+        Square& getSquare(int row, int col);
+        const Square& getSquare(int row, int col) const;
+
 };

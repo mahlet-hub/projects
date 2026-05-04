@@ -5,7 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+# 🔥 ADD Multimedia here
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+
 qt_standard_project_setup()
 
 set(APP_SOURCES
@@ -23,6 +25,7 @@ set(APP_SOURCES
     src/controller/AppController.cpp
     src/controller/AppController.h
 
+
     src/view/MainWindow.cpp
     src/view/MainWindow.h
 )
@@ -31,4 +34,17 @@ add_executable(app ${APP_SOURCES})
 
 target_include_directories(app PRIVATE src)
 
-target_link_libraries(app PRIVATE Qt6::Widgets)
+# 🔥 LINK Multimedia here
+target_link_libraries(app PRIVATE Qt6::Widgets Qt6::Multimedia)
+
+qt_add_resources(app "resources"
+    PREFIX "/"
+    FILES
+        src/view//bomb-3.gif
+        src/view/cloud.png
+        src/view/marioground.png
+        src/view/start.wav
+        src/view/firstclick.wav
+        src/view/bombsound.wav
+        src/view/defeat.wav
+)
